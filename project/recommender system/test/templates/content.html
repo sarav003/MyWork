@@ -13,12 +13,12 @@
 </style>
 <body style="background-color:black">
 
-    <nav class="navbar" style="background-color:#00a65a">
+    <nav class="navbar" style="background-color:#eba835">
         <a class="navbar-brand">My Book recommender</a>
         <ul class="nav navbar-nav">
             <li><a href="/">Home</a></li>
             <li><a href="/colab">Rating-based</a></li>
-            <li><a href="/content">content-based</a></li>
+            <li><a href="/content">Content-based</a></li>
             <li><a>Contact</a></li>
         </ul>
     </nav>
@@ -26,23 +26,29 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1 class="text-white" style="font-size:50px">Top Books</h1>
+                <h1 class="text-white" style="font-size:30px">Recommendation based on content</h1>
+                <form action="/recommend_content" method="post">
+                    <input name="content_input" type="text" class="form-control"><br>
+                    <input type="submit" class="btn btn-lg btn-warning">
+                </form>
             </div>
-
-            {% for i in range(book_name|length) %}
+           
+            {% if dta %}
+             {% for j in dta %}
                 <div class="col-md-3" style="margin-top:50px">
                     <div class="card">
                         <div class="card-body">
-                            <img class="card-img-top" src="{{ image[i] }}">
-                            <p class="text-white">{{ book_name[i] }}</p>
-                            <h4 class="text-white">{{ author[i] }}</h4>
-                            <h4 class="text-white">Rating - {{ ratings[i] }}</h4>
+                            <img class="card-img-top" src="{{j[2]}}">
+                            <h5 class="text-white">{{j[0]}}</p>
+                            <h4 class="text-white">{{j[1]}}</h4>
+                            <h4 class="text-white">{{j[3]}}</h4>
                         </div>
                     </div>
                 </div>
-            {% endfor %}
-        
-    
+             {% endfor %}
+            {% endif %}
+
+
         </div>
     </div>
 
